@@ -62,12 +62,18 @@ func _process(delta):
 		if card.is_down() and card.tile == player_tile:
 			hit()
 
+	if $Player.is_rolling():
+		hide_indicator()
+	else:
+		show_indicator()
+
 func _physics_process(delta):
 	for chip in chips:
 		var collision = chip.do_move_and_collide()
 		if collision:
 			hit()
 			chip.dead = true
+
 
 
 func _input(_event):
@@ -207,3 +213,28 @@ func _on_CardTimer_timeout():
 	card_time_max = pow(card_time_max+0.9, 0.97) - 0.9
 	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
 	
+
+func show_indicator():
+	var north_value = $Player.get_north_value()
+	$IndicatorN.fade_in()
+	$IndicatorE.fade_in()
+	$IndicatorS.fade_in()
+	$IndicatorW.fade_in()
+
+	$IndicatorN.set_value(north_value)
+	$IndicatorN.set_position($Player.get_position() + Vector2(0, -64))
+	var east_value = $Player.get_east_value()
+	$IndicatorE.set_value(east_value)
+	$IndicatorE.set_position($Player.get_position() + Vector2(64, 0))
+	var west_value = $Player.get_west_value()
+	$IndicatorW.set_value(west_value)
+	$IndicatorW.set_position($Player.get_position() + Vector2(-64, 0))
+	var south_value = $Player.get_south_value()
+	$IndicatorS.set_value(south_value)
+	$IndicatorS.set_position($Player.get_position() + Vector2(0, 64))
+
+func hide_indicator():
+	$IndicatorN.visible = false
+	$IndicatorE.visible = false
+	$IndicatorS.visible = false
+	$IndicatorW.visible = false
