@@ -68,7 +68,7 @@ func _process(delta):
 		if card.is_down() and card.tile == player_tile:
 			hit()
 
-	if $Player.is_rolling():
+	if $Player.is_rolling() or player_dead:
 		hide_indicator()
 	else:
 		show_indicator()
