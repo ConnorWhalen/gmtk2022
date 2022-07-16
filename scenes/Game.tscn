@@ -17,9 +17,13 @@ wait_time = 2.0
 [node name="SpecialTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="CardTimer" type="Timer" parent="."]
+wait_time = 4.0
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 480, 288 )
 z_index = 1
 
 [connection signal="timeout" from="ChipTimer" to="." method="_on_ChipTimer_timeout"]
 [connection signal="timeout" from="SpecialTimer" to="." method="_on_SpecialTimer_timeout"]
+[connection signal="timeout" from="CardTimer" to="." method="_on_CardTimer_timeout"]

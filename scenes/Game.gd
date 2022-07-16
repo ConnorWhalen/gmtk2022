@@ -3,6 +3,7 @@ extends Node2D
 
 onready var Chip = preload("res://scenes/Chip.tscn")
 onready var Special = preload("res://scenes/Special.tscn")
+onready var Card = preload("res://scenes/Cards.tscn")
 
 var SCREEN_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 var SCREEN_WIDTH = ProjectSettings.get_setting("display/window/size/width")
@@ -10,8 +11,16 @@ var TILE_SIZE = 64
 var RIGHT_BOUND = SCREEN_WIDTH/TILE_SIZE - 2
 var BOTTOM_BOUND = SCREEN_HEIGHT/TILE_SIZE - 2
 
+var CHIP_TIME_MIN = 1.5
+var CHIP_TIME_MAX = 3
+var SPECIAL_TIME_MIN = 5
+var SPECIAL_TIME_MAX = 10
+var CARD_TIME_MIN = 4
+var CARD_TIME_MAX = 6
+
 var chips = []
 var specials = []
+var cards = []
 var player_tile = [0, 0]
 var rng
 
@@ -19,6 +28,7 @@ var rng
 func _ready():
 	$ChipTimer.start()
 	$SpecialTimer.start()
+	$CardTimer.start()
 	rng = RandomNumberGenerator.new()
 	
 	player_tile = [6, 3]
@@ -31,6 +41,7 @@ func _ready():
 func _process(delta):
 	cull(chips)
 	cull(specials)
+	cull(cards)
 
 
 func _input(_event):
@@ -58,20 +69,6 @@ func try_move_player(direction):
 	if is_tile_in_bounds(next_tile[0], next_tile[1]):
 		$Player.move(direction)
 		player_tile = next_tile
-
-
-func _on_ChipTimer_timeout():
-	var chip = Chip.instance()
-	chip.z_index = 1
-	add_child(chip)
-	chips.append(chip)
-
-
-func _on_SpecialTimer_timeout():
-	var special = Special.instance()
-	special.set_tile(get_random_tile())
-	add_child(special)
-	specials.append(special)
 
 
 func cull(nodes):
@@ -110,3 +107,33 @@ func is_tile_in_bounds(x, y):
 		):
 			return false
 	return true
+
+
+func set_timer_wait(timer, min_wait, max_wait):
+	rng.randomize()
+	timer.wait_time = rng.randf_range(min_wait, max_wait)
+
+
+func _on_ChipTimer_timeout():
+	var chip = Chip.instance()
+	chip.z_index = 1
+	add_child(chip)
+	chips.append(chip)
+	set_timer_wait($ChipTimer, CHIP_TIME_MIN, CHIP_TIME_MAX)
+
+
+func _on_SpecialTimer_timeout():
+	var special = Special.instance()
+	special.set_tile(get_random_tile())
+	add_child(special)
+	specials.append(special)
+	set_timer_wait($SpecialTimer, SPECIAL_TIME_MIN, SPECIAL_TIME_MAX)
+
+
+func _on_CardTimer_timeout():
+	var card = Card.instance()
+	card.set_tile(get_random_tile())
+	add_child(card)
+	cards.append(card)
+	set_timer_wait($CardTimer, CARD_TIME_MIN, CARD_TIME_MAX)
+	
