@@ -1,12 +1,13 @@
-extends Node2D
+extends Control
 
 signal mode_game
 
-
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	pass # Replace with function body.
 
+func _on_StartButton_pressed():
+	get_tree().change_scene("res://scenes/Game.tscn")
 
-func _process(delta):
-	if Input.is_action_pressed("ui_accept"):
-		emit_signal("mode_game")
+func _on_QuitButton_pressed():
+	get_tree().quit()
