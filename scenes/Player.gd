@@ -44,7 +44,7 @@ onready var sprite2 = $Sprite2
 # var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
 # var six_hflip =		preload("res://assets/test_die/icon_6_hflip.png")
 
-onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.GODOT_TP)
+onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
 
 var texture_arr
 var texture_arr_vflip
@@ -65,6 +65,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print("Rolling progress: ", roll_progress, "\n", is_rolling())
 	if(right_roll_flag):
 		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
 		set_progress(roll_progress)
@@ -80,7 +81,6 @@ func _process(delta):
 		set_shader(false,true,false,false)
 		if roll_progress == 1.0:
 			sprite2.set_texture(texture_arr[die_face.top - 1])
-			print(die_face)
 			left_roll_flag = false
 			roll_progress = 0
 			set_shader(false,false,false,false)
@@ -155,6 +155,21 @@ func move(direction):
 func get_top_value():
 	return die_face.top
 
+func get_north_value():
+	return die_face.up
+
+func get_east_value():
+	return die_face.right
+
+func get_south_value():
+	return die_face.down
+
+func get_west_value():
+	return die_face.left
+
+func get_bot_value():
+	return die_face.bot
+
 
 func set_shader(bRight=false, bLeft=false, bUp=false, bDown=false):
 	sprite.material.set_shader_param("right", bRight)
@@ -216,4 +231,8 @@ func roll(direction):
 		die_face.up = up
 		die_face.bot = bot
 
-
+func is_rolling():
+	var retval = true
+	if roll_progress == 0 or roll_progress == 1:
+		retval = false
+	return retval
