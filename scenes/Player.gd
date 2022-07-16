@@ -23,39 +23,44 @@ var die_face = {"top": 1, "up": 5, "down": 2, "right": 4, "left": 3, "bot": 6}
 onready var sprite = $Sprite
 onready var sprite2 = $Sprite2
 
-var one_texture =	preload("res://assets/test_die/icon_1.png")
-var two_texture =	preload("res://assets/test_die/icon_2.png")
-var three_texture =	preload("res://assets/test_die/icon_3.png")
-var four_texture =	preload("res://assets/test_die/icon_4.png")
-var five_texture =	preload("res://assets/test_die/icon_5.png")
-var six_texture =	preload("res://assets/test_die/icon_6.png")
+# var one_texture =	preload("res://assets/test_die/icon_1.png")
+# var two_texture =	preload("res://assets/test_die/icon_2.png")
+# var three_texture =	preload("res://assets/test_die/icon_3.png")
+# var four_texture =	preload("res://assets/test_die/icon_4.png")
+# var five_texture =	preload("res://assets/test_die/icon_5.png")
+# var six_texture =	preload("res://assets/test_die/icon_6.png")
+#
+# var one_vflip =		preload("res://assets/test_die/icon_1_vflip.png")
+# var two_vflip =		preload("res://assets/test_die/icon_2_vflip.png")
+# var three_vflip =	preload("res://assets/test_die/icon_3_vflip.png")
+# var four_vflip =	preload("res://assets/test_die/icon_4_vflip.png")
+# var five_vflip =	preload("res://assets/test_die/icon_5_vflip.png")
+# var six_vflip =		preload("res://assets/test_die/icon_6_vflip.png")
+#
+# var one_hflip =		preload("res://assets/test_die/icon_1_hflip.png")
+# var two_hflip =		preload("res://assets/test_die/icon_2_hflip.png")
+# var three_hflip =	preload("res://assets/test_die/icon_3_hflip.png")
+# var four_hflip =	preload("res://assets/test_die/icon_4_hflip.png")
+# var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
+# var six_hflip =		preload("res://assets/test_die/icon_6_hflip.png")
 
-var one_vflip =		preload("res://assets/test_die/icon_1_vflip.png")
-var two_vflip =		preload("res://assets/test_die/icon_2_vflip.png")
-var three_vflip =	preload("res://assets/test_die/icon_3_vflip.png")
-var four_vflip =	preload("res://assets/test_die/icon_4_vflip.png")
-var five_vflip =	preload("res://assets/test_die/icon_5_vflip.png")
-var six_vflip =		preload("res://assets/test_die/icon_6_vflip.png")
+onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.GODOT_TP)
 
-var one_hflip =		preload("res://assets/test_die/icon_1_hflip.png")
-var two_hflip =		preload("res://assets/test_die/icon_2_hflip.png")
-var three_hflip =	preload("res://assets/test_die/icon_3_hflip.png")
-var four_hflip =	preload("res://assets/test_die/icon_4_hflip.png")
-var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
-var six_hflip =		preload("res://assets/test_die/icon_6_hflip.png")
-
-var texture_arr = [one_texture, two_texture, three_texture, four_texture, five_texture, six_texture]
-var texture_arr_vflip = [one_vflip, two_vflip, three_vflip, four_vflip, five_vflip, six_vflip]
-var texture_arr_hflip = [one_hflip, two_hflip, three_hflip, four_hflip, five_hflip, six_hflip]
-
+var texture_arr
+var texture_arr_vflip
+var texture_arr_hflip
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 
+	texture_arr = tp.texture_arr
+	texture_arr_vflip = tp.texture_arr_vflip
+	texture_arr_hflip = tp.texture_arr_hflip
 #	position = screen_size/2
-	sprite.set_texture(one_texture)
-	sprite2.set_texture(one_texture)
+	sprite.set_texture(texture_arr[0])
+	sprite2.set_texture(texture_arr[0])
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
