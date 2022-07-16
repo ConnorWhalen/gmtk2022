@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Save="*res://scenes/singletons/Save.gd"
+TexturePacks="*res://scenes/singletons/TexturePacks.gd"
 
 [display]
 
