@@ -11,12 +11,14 @@ var TILE_SIZE = 64
 var RIGHT_BOUND = SCREEN_WIDTH/TILE_SIZE - 2
 var BOTTOM_BOUND = SCREEN_HEIGHT/TILE_SIZE - 2
 
-var CHIP_TIME_MIN = 1.5
-var CHIP_TIME_MAX = 3
-var SPECIAL_TIME_MIN = 5
-var SPECIAL_TIME_MAX = 10
-var CARD_TIME_MIN = 4
-var CARD_TIME_MAX = 6
+var chip_time_min = 3
+var chip_time_max = 6
+var special_time_min = 10
+var special_time_max = 15
+var card_time_min = 8
+var card_time_max = 12
+
+var SCORE_SPEED = 100
 
 var chips = []
 var specials = []
@@ -24,7 +26,9 @@ var cards = []
 var player_tile = [0, 0]
 var rng
 var health = 3
+var score = 0
 var hit_lock = false
+var player_dead = false
 
 
 func _ready():
@@ -44,6 +48,10 @@ func _process(delta):
 	cull(chips)
 	cull(specials)
 	cull(cards)
+	
+	if not player_dead:
+		score += delta * SCORE_SPEED
+		update_score()
 	
 	for special in specials:
 		if special.tile == player_tile and $Player.get_top_value() == special.value:
@@ -104,7 +112,9 @@ func hit():
 		update_health()
 		
 		$Player.visible = false
-		if health > 0:
+		if health == 0:
+			player_dead = true
+		else:
 			yield(get_tree().create_timer(0.2, false), "timeout")
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
@@ -125,7 +135,11 @@ func apply_special():
 
 
 func update_health():
-	$HealthLabel.text = "x " + str(health)
+	$HealthLabel.text = str(health)
+
+
+func update_score():
+	$CashLabel.text = str(int(score/100) * 100)
 
 
 func get_random_tile():
@@ -168,7 +182,10 @@ func _on_ChipTimer_timeout():
 	chip.z_index = 2
 	add_child(chip)
 	chips.append(chip)
-	set_timer_wait($ChipTimer, CHIP_TIME_MIN, CHIP_TIME_MAX)
+	set_timer_wait($ChipTimer, chip_time_min, chip_time_max)
+	chip_time_min = pow(chip_time_min+0.9, 0.97) - 0.9
+	chip_time_max = pow(chip_time_max+0.9, 0.97) - 0.9
+	print("CHIP TIME: " + str(chip_time_min) + " - " + str(chip_time_max))
 
 
 func _on_SpecialTimer_timeout():
@@ -176,7 +193,7 @@ func _on_SpecialTimer_timeout():
 	special.set_tile(get_random_tile())
 	add_child(special)
 	specials.append(special)
-	set_timer_wait($SpecialTimer, SPECIAL_TIME_MIN, SPECIAL_TIME_MAX)
+	set_timer_wait($SpecialTimer, special_time_min, special_time_max)
 
 
 func _on_CardTimer_timeout():
@@ -185,5 +202,8 @@ func _on_CardTimer_timeout():
 	card.set_tile(get_random_tile())
 	add_child(card)
 	cards.append(card)
-	set_timer_wait($CardTimer, CARD_TIME_MIN, CARD_TIME_MAX)
+	set_timer_wait($CardTimer, card_time_min, card_time_max)
+	card_time_min = pow(card_time_min+0.9, 0.97) - 0.9
+	card_time_max = pow(card_time_max+0.9, 0.97) - 0.9
+	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
 	

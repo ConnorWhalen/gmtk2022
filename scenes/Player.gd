@@ -80,7 +80,6 @@ func _process(delta):
 		set_shader(false,true,false,false)
 		if roll_progress == 1.0:
 			sprite2.set_texture(texture_arr[die_face.top - 1])
-			print(die_face)
 			left_roll_flag = false
 			roll_progress = 0
 			set_shader(false,false,false,false)
