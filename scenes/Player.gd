@@ -42,7 +42,7 @@ onready var sprite2 = $Sprite2
 # var three_hflip =	preload("res://assets/test_die/icon_3_hflip.png")
 # var four_hflip =	preload("res://assets/test_die/icon_4_hflip.png")
 # var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
-# var six_hflip =		preload("res://assets/test_die/icon_6_hflip.png")
+# var six_hflip =	fade_progress = 0	preload("res://assets/test_die/icon_6_hflip.png")
 
 onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
 
@@ -65,7 +65,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print("Rolling progress: ", roll_progress, "\n", is_rolling())
 	if(right_roll_flag):
 		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
 		set_progress(roll_progress)
