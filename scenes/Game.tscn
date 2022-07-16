@@ -5,6 +5,7 @@
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/cards.png" type="Texture" id=4]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Indicator.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -43,6 +44,13 @@ text = "x 3"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[node name="IndicatorN" parent="." instance=ExtResource( 4 )]
+
+[node name="IndicatorE" parent="." instance=ExtResource( 4 )]
+
+[node name="IndicatorS" parent="." instance=ExtResource( 4 )]
+
+[node name="IndicatorW" parent="." instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="ChipTimer" to="." method="_on_ChipTimer_timeout"]
 [connection signal="timeout" from="SpecialTimer" to="." method="_on_SpecialTimer_timeout"]
