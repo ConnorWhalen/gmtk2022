@@ -4,7 +4,7 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-enum TP_INDEX {GODOT_TP, TEST_TP}
+enum TP_INDEX {GODOT_TP, TEST_TP, DEFAULT_TP}
 
 # Default values as the test texture pack
 var one_texture =	preload("res://assets/test_die/icon_1.png")
@@ -57,6 +57,27 @@ func get_texturepack(tp_index):
 			six_hflip =		six_texture
 		TP_INDEX.TEST_TP:
 			pass # Use defaults
+		TP_INDEX.DEFAULT_TP:
+			one_texture =	preload("res://assets/default_die/Dice 1.png")
+			two_texture =	preload("res://assets/default_die/Dice 2.png")
+			three_texture =	preload("res://assets/default_die/Dice 3.png")
+			four_texture =	preload("res://assets/default_die/Dice 4.png")
+			five_texture =	preload("res://assets/default_die/Dice 5.png")
+			six_texture =	preload("res://assets/default_die/Dice 6.png")
+
+			one_vflip =		one_texture
+			two_vflip =		preload("res://assets/default_die/Dice 2_vflip.png")
+			three_vflip =	preload("res://assets/default_die/Dice 3_vflip.png")
+			four_vflip =	four_texture
+			five_vflip =	five_texture
+			six_vflip =		six_texture
+
+			one_hflip =		one_texture
+			two_hflip =		two_vflip
+			three_hflip =	three_vflip
+			four_hflip =	four_texture
+			five_hflip =	five_texture
+			six_hflip =		six_texture
 
 	var texture_arr = [one_texture, two_texture, three_texture, four_texture, five_texture, six_texture]
 	var texture_arr_vflip = [one_vflip, two_vflip, three_vflip, four_vflip, five_vflip, six_vflip]
