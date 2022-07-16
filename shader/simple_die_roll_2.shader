@@ -10,7 +10,7 @@ const float PI = 3.14159265359;
 
 float roll_right(float t, float uvx)
 {
-	return 32.0*(-1.0*uvx + (2.0 -1.0*uvx)*cos(uvx*t*PI));
+	return 32.0*cos(uvx*t*PI) - 32.0;
 }
 
 float roll_up(float t, float uvy)
