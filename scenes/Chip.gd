@@ -1,9 +1,10 @@
-extends Node2D
+extends KinematicBody2D
 
 var SCREEN_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 var SCREEN_WIDTH = ProjectSettings.get_setting("display/window/size/width")
 
 export var SPEED = 2
+export var ROTATE_SPEED = 6
 export var BUFFER = 32
 
 enum ChipType {
@@ -35,16 +36,20 @@ func _ready():
 
 func _process(delta):
 	elapsed += delta
-	position += (direction * SPEED)
+#	position += (direction * SPEED)
 	match chip_type:
 		ChipType.ROTATE:
 			$Sprite.rotation_degrees += 1
 		ChipType.SPIN:
-			$Sprite.scale.x = cos(elapsed*6)
+			$Sprite.scale.x = cos(elapsed*ROTATE_SPEED)
 	if (position.x < -BUFFER*2 or position.x > SCREEN_WIDTH + BUFFER*2 or
 		position.y < -BUFFER*2 or position.y > SCREEN_HEIGHT + BUFFER*2
 	):
 		dead = true
+
+
+func do_move_and_collide():
+	return move_and_collide(direction * SPEED)
 
 
 func is_dead():
