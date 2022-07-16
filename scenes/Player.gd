@@ -22,7 +22,7 @@ onready var sprite2 = $Sprite2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	position = screen_size/2
+#	position = screen_size/2
 	sprite_size = sprite.texture.get_size()
 	sprite2_size = sprite2.texture.get_size()
 	var sprite_scale = Vector2(sprite_size.x/PLAYER_WIDTH, sprite_size.y/PLAYER_HEIGHT)
@@ -68,19 +68,37 @@ func _process(delta):
 			set_shader(false,false,false,false)
 	pass
 
-func _input(_event):
-	if Input.is_action_just_pressed("ui_right"):
-		position += Vector2(PLAYER_WIDTH,0)
-		right_roll_flag = true
-	elif Input.is_action_just_pressed("ui_left"):
-		position += Vector2(-PLAYER_WIDTH,0)
-		left_roll_flag = true
-	elif Input.is_action_just_pressed("ui_up"):
-		position += Vector2(0,-PLAYER_HEIGHT)
-		up_roll_flag = true
-	elif Input.is_action_just_pressed("ui_down"):
-		position += Vector2(0,PLAYER_HEIGHT)
-		down_roll_flag = true
+#func _input(_event):
+#	if Input.is_action_just_pressed("ui_right"):
+#		position += Vector2(PLAYER_WIDTH,0)
+#		right_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_left"):
+#		position += Vector2(-PLAYER_WIDTH,0)
+#		left_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_up"):
+#		position += Vector2(0,-PLAYER_HEIGHT)
+#		up_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_down"):
+#		position += Vector2(0,PLAYER_HEIGHT)
+#		down_roll_flag = true
+
+
+func move(direction):
+	match direction:
+		"right":
+			position += Vector2(PLAYER_WIDTH,0)
+			right_roll_flag = true
+		"left":
+			position += Vector2(-PLAYER_WIDTH,0)
+			left_roll_flag = true
+		"up":
+			position += Vector2(0,-PLAYER_HEIGHT)
+			up_roll_flag = true
+		"down":
+			position += Vector2(0,PLAYER_HEIGHT)
+			down_roll_flag = true
+			
+
 
 func set_shader(bRight=false, bLeft=false, bUp=false, bDown=false):
 	sprite.material.set_shader_param("right", bRight)
