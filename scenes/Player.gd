@@ -52,9 +52,11 @@ var texture_arr_hflip = [one_hflip, two_hflip, three_hflip, four_hflip, five_hfl
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	position = screen_size/2
+
+#	position = screen_size/2
 	sprite.set_texture(one_texture)
 	sprite2.set_texture(one_texture)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -97,27 +99,53 @@ func _process(delta):
 			set_shader(false,false,false,false)
 	pass
 
-func _input(_event):
-	if Input.is_action_just_pressed("ui_right"):
-		position += Vector2(PLAYER_WIDTH,0)
-		if(right_roll_flag == false):
-			roll(DIR_RIGHT)
-			right_roll_flag = true
-	elif Input.is_action_just_pressed("ui_left"):
-		position += Vector2(-PLAYER_WIDTH,0)
-		if(left_roll_flag == false):
-			roll(DIR_LEFT)
-			left_roll_flag = true
-	elif Input.is_action_just_pressed("ui_up"):
-		position += Vector2(0,-PLAYER_HEIGHT)
-		if(up_roll_flag == false):
-			roll(DIR_UP)
-			up_roll_flag = true
-	elif Input.is_action_just_pressed("ui_down"):
-		position += Vector2(0,PLAYER_HEIGHT)
-		if(down_roll_flag == false):
-			roll(DIR_DOWN)
-			down_roll_flag = true
+
+#func _input(_event):
+#	if Input.is_action_just_pressed("ui_right"):
+#		position += Vector2(PLAYER_WIDTH,0)
+#		if(right_roll_flag == false):
+#			roll(DIR_RIGHT)
+#			right_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_left"):
+#		position += Vector2(-PLAYER_WIDTH,0)
+#		if(left_roll_flag == false):
+#			roll(DIR_LEFT)
+#			left_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_up"):
+#		position += Vector2(0,-PLAYER_HEIGHT)
+#		if(up_roll_flag == false):
+#			roll(DIR_UP)
+#			up_roll_flag = true
+#	elif Input.is_action_just_pressed("ui_down"):
+#		position += Vector2(0,PLAYER_HEIGHT)
+#		if(down_roll_flag == false):
+#			roll(DIR_DOWN)
+#			down_roll_flag = true
+
+
+func move(direction):
+	match direction:
+		"right":
+			position += Vector2(PLAYER_WIDTH,0)
+			if(right_roll_flag == false):
+				roll(DIR_RIGHT)
+				right_roll_flag = true
+		"left":
+			position += Vector2(-PLAYER_WIDTH,0)
+			if(left_roll_flag == false):
+				roll(DIR_LEFT)
+				left_roll_flag = true
+		"up":
+			position += Vector2(0,-PLAYER_HEIGHT)
+			if(up_roll_flag == false):
+				roll(DIR_UP)
+				up_roll_flag = true
+		"down":
+			position += Vector2(0,PLAYER_HEIGHT)
+			if(down_roll_flag == false):
+				roll(DIR_DOWN)
+				down_roll_flag = true
+			
 
 func set_shader(bRight=false, bLeft=false, bUp=false, bDown=false):
 	sprite.material.set_shader_param("right", bRight)
