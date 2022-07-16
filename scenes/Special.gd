@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
+
 var SCREEN_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 var SCREEN_WIDTH = ProjectSettings.get_setting("display/window/size/width")
 var TILE_SIZE = 64
@@ -12,8 +14,10 @@ var tile = [0, 0]
 func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	value = rng.randi() % 6
-	$Label.text = str(value)
+	value = (rng.randi() % 6) + 1
+	
+	var texture_arr = tp.texture_arr
+	$Sprite.set_texture(texture_arr[value-1])
 	
 #	rng.randomize()
 #	tile[0] = rng.randi() % (SCREEN_WIDTH/TILE_SIZE)
