@@ -44,7 +44,7 @@ onready var sprite2 = $Sprite2
 # var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
 # var six_hflip =		preload("res://assets/test_die/icon_6_hflip.png")
 
-onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.GODOT_TP)
+onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
 
 var texture_arr
 var texture_arr_vflip
