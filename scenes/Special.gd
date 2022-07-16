@@ -33,13 +33,23 @@ func _process(delta):
 
 func _on_DeathTimer_timeout():
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	visible = false
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	visible = true
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	visible = false
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	visible = true
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	visible = false
 	dead = true
