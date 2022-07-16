@@ -52,7 +52,6 @@ func _process(delta):
 				state = CardState.DOWN
 				yield(get_tree().create_timer(0.5, false), "timeout")
 				$Container/Slam.visible = false
-				yield(get_tree().create_timer(0.5, false), "timeout")
 				dead = true
 
 
@@ -62,6 +61,10 @@ func set_tile(tile_):
 	var direction = Vector2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2) - position
 	rotation = direction.angle() + PI/2
 	$Warning.rotation = -rotation
+
+
+func is_down():
+	return state == CardState.DOWN
 
 
 func set_card_sprite(sprite):

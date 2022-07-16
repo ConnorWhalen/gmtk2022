@@ -23,6 +23,8 @@ var specials = []
 var cards = []
 var player_tile = [0, 0]
 var rng
+var health = 3
+var hit_lock = false
 
 
 func _ready():
@@ -42,6 +44,22 @@ func _process(delta):
 	cull(chips)
 	cull(specials)
 	cull(cards)
+	
+	for special in specials:
+		if special.tile == player_tile and $Player.get_top_value() == special.value:
+			apply_special()
+			special.dead = true
+	
+	for card in cards:
+		if card.is_down() and card.tile == player_tile:
+			hit()
+
+func _physics_process(delta):
+	for chip in chips:
+		var collision = chip.do_move_and_collide()
+		if collision:
+			hit()
+			chip.dead = true
 
 
 func _input(_event):
@@ -77,6 +95,37 @@ func cull(nodes):
 		if node.dead:
 			remove_child(node)
 			nodes.remove(i)
+
+
+func hit():
+	if not hit_lock:
+		hit_lock = true
+		health -= 1
+		update_health()
+		
+		$Player.visible = false
+		if health > 0:
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			$Player.visible = true
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			$Player.visible = false
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			$Player.visible = true
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			$Player.visible = false
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			$Player.visible = true
+			yield(get_tree().create_timer(0.2, false), "timeout")
+			hit_lock = false
+
+
+func apply_special():
+	health += 1
+	update_health()
+
+
+func update_health():
+	$HealthLabel.text = "x " + str(health)
 
 
 func get_random_tile():
@@ -116,7 +165,7 @@ func set_timer_wait(timer, min_wait, max_wait):
 
 func _on_ChipTimer_timeout():
 	var chip = Chip.instance()
-	chip.z_index = 1
+	chip.z_index = 2
 	add_child(chip)
 	chips.append(chip)
 	set_timer_wait($ChipTimer, CHIP_TIME_MIN, CHIP_TIME_MAX)
@@ -132,6 +181,7 @@ func _on_SpecialTimer_timeout():
 
 func _on_CardTimer_timeout():
 	var card = Card.instance()
+	card.z_index = 1
 	card.set_tile(get_random_tile())
 	add_child(card)
 	cards.append(card)

@@ -150,7 +150,11 @@ func move(direction):
 			if(down_roll_flag == false):
 				roll(DIR_DOWN)
 				down_roll_flag = true
-			
+
+
+func get_top_value():
+	return die_face.top
+
 
 func set_shader(bRight=false, bLeft=false, bUp=false, bDown=false):
 	sprite.material.set_shader_param("right", bRight)
@@ -211,7 +215,5 @@ func roll(direction):
 		die_face.top = top
 		die_face.up = up
 		die_face.bot = bot
-
-	print(die_face)
 
 
