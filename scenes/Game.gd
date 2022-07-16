@@ -191,15 +191,15 @@ func _on_CardTimer_timeout():
 	set_timer_wait($CardTimer, CARD_TIME_MIN, CARD_TIME_MAX)
 
 func show_indicator():
-	var north_value = $Player.die_face.up
+	var north_value = $Player.get_north_value()
 	$IndicatorN.set_value(north_value)
 	$IndicatorN.set_position($Player.get_position() + Vector2(0, -64))
-	var east_value = $Player.die_face.right
+	var east_value = $Player.get_east_value()
 	$IndicatorE.set_value(east_value)
 	$IndicatorE.set_position($Player.get_position() + Vector2(64, 0))
-	var west_value = $Player.die_face.left
+	var west_value = $Player.get_west_value()
 	$IndicatorW.set_value(west_value)
 	$IndicatorW.set_position($Player.get_position() + Vector2(-64, 0))
-	var south_value = $Player.die_face.down
+	var south_value = $Player.get_south_value()
 	$IndicatorS.set_value(south_value)
 	$IndicatorS.set_position($Player.get_position() + Vector2(0, 64))

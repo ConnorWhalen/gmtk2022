@@ -155,6 +155,21 @@ func move(direction):
 func get_top_value():
 	return die_face.top
 
+func get_north_value():
+	return die_face.up
+
+func get_east_value():
+	return die_face.right
+
+func get_south_value():
+	return die_face.down
+
+func get_west_value():
+	return die_face.left
+
+func get_bot_value():
+	return die_face.bot
+
 
 func set_shader(bRight=false, bLeft=false, bUp=false, bDown=false):
 	sprite.material.set_shader_param("right", bRight)
