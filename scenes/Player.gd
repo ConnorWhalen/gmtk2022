@@ -65,6 +65,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print("Rolling progress: ", roll_progress, "\n", is_rolling())
 	if(right_roll_flag):
 		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
 		set_progress(roll_progress)
@@ -230,4 +231,8 @@ func roll(direction):
 		die_face.up = up
 		die_face.bot = bot
 
-
+func is_rolling():
+	var retval = true
+	if roll_progress == 0 or roll_progress == 1:
+		retval = false
+	return retval
