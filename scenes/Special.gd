@@ -15,11 +15,16 @@ func _ready():
 	value = rng.randi() % 6
 	$Label.text = str(value)
 	
-	rng.randomize()
-	tile[0] = rng.randi() % (SCREEN_WIDTH/TILE_SIZE)
-	rng.randomize()
-	tile[1] = rng.randi() % (SCREEN_HEIGHT/TILE_SIZE)
-	position = Vector2(tile[0]*TILE_SIZE, tile[1]*TILE_SIZE)
+#	rng.randomize()
+#	tile[0] = rng.randi() % (SCREEN_WIDTH/TILE_SIZE)
+#	rng.randomize()
+#	tile[1] = rng.randi() % (SCREEN_HEIGHT/TILE_SIZE)
+#	position = Vector2(tile[0]*TILE_SIZE, tile[1]*TILE_SIZE)
+
+
+func set_tile(tile_):
+	tile = tile_
+	position = Vector2((tile[0]+1) * TILE_SIZE, (tile[1]+1) * TILE_SIZE)
 
 
 func _process(delta):
