@@ -1,6 +1,7 @@
 extends Node2D
 
 signal mode_menu
+signal mode_upgrade
 signal exit_game
 
 onready var Chip = preload("res://scenes/Chip.tscn")
@@ -87,6 +88,9 @@ func _process(delta):
 	
 	if $Dollar.visible:
 		$Dollar.position.y -= 1
+	if $CanvasLayer2/DeadLabel.visible:
+		if $CanvasLayer2/DeadLabel.scale.x < 4:
+			$CanvasLayer2/DeadLabel.scale += Vector2(0.01, 0.01)
 
 func _physics_process(delta):
 	for chip in chips:
@@ -142,18 +146,35 @@ func hit():
 		$Player.visible = false
 		if health == 0:
 			player_dead = true
+			$CanvasLayer2/DeadLabel.visible = true
+			yield(get_tree().create_timer(8, false), "timeout")
+			if get_tree() == null:
+				return
+			emit_signal("mode_upgrade")
 		else:
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = false
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = false
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			hit_lock = false
 
 
@@ -166,6 +187,8 @@ func apply_special(pos):
 	$Dollar.position = pos + Vector2(32, 32)
 	$Dollar.visible = true
 	yield(get_tree().create_timer(1, false), "timeout")
+	if get_tree() == null:
+		return
 	$Dollar.visible = false
 	
 
