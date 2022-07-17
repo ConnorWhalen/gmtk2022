@@ -63,8 +63,8 @@ func try_move_player(direction):
 			"down":
 				next_tile[1] += 1
 		if is_tile_in_bounds(next_tile[0], next_tile[1]):
-			$Player.move(direction)
-			player_tile = next_tile
+			if $Player.move(direction):
+				player_tile = next_tile
 
 
 func is_tile_in_bounds(x, y):
