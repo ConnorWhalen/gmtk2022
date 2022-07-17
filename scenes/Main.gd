@@ -34,7 +34,6 @@ func _ready():
 
 
 func set_mode(mode_id):
-	print("CHANGING MODE: " + str(mode_id))
 	remove_child(current_mode)
 	current_mode_id = mode_id
 	match current_mode_id:
