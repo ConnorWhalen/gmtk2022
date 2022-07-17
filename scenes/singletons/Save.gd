@@ -4,9 +4,8 @@ var SAVE_FILE_NAME = "user://save_file.save"
 
 enum STAT_INDEX {
 	SPEED = 0,
-	EFFICIENCY = 1,
-	RUDDER = 2,
-	PADDLE = 3,
+	FADE = 1,
+	HEALTH = 2,
 	STAT_INDEX_max,
 }
 
@@ -31,6 +30,7 @@ func pull_stats():
 		save_stats_tmp["stats"] = []
 		for i in range(STAT_INDEX.STAT_INDEX_max):
 			save_stats_tmp["stats"].append({"count": 0})
+		save_stats_tmp["texture_pack"] = TexturePacks.TP_INDEX.DEFAULT_TP
 
 	save_file.close()
 
