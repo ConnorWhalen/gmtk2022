@@ -4,7 +4,7 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-enum TP_INDEX {GODOT_TP, TEST_TP, DEFAULT_TP, RED_TP, PURP_TP, ORANGE_TP, GREY_TP, BLUE_TP, COLOURFUL_TP}
+enum TP_INDEX {DEFAULT_TP, RED_TP, PURP_TP, ORANGE_TP, GREY_TP, BLUE_TP, COLOURFUL_TP, GODOT_TP, TEST_TP, TP_INDEX_max}
 
 # Default values as the test texture pack
 var one_texture =	preload("res://assets/test_die/icon_1.png")
