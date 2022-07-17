@@ -4,9 +4,8 @@ var SAVE_FILE_NAME = "user://save_file.save"
 
 enum STAT_INDEX {
 	SPEED = 0,
-	EFFICIENCY = 1,
-	RUDDER = 2,
-	PADDLE = 3,
+	FADE = 1,
+	HEALTH = 2,
 	STAT_INDEX_max,
 }
 
