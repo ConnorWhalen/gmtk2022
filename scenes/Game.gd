@@ -34,12 +34,13 @@ var specials = []
 var cards = []
 var player_tile = [0, 0]
 var rng
-var health = 3
+var health = 1
 var score = 0
 var elapsed = 0
 var hit_lock = false
 var player_dead = false
 
+var save_stats
 
 func _ready():
 	$ChipTimer.start()
@@ -47,6 +48,10 @@ func _ready():
 	$CardTimer.start()
 	rng = RandomNumberGenerator.new()
 	
+	save_stats = Save.pull_stats()
+	health += save_stats["stats"][Save.STAT_INDEX.HEALTH]["count"]
+	update_health()
+
 	player_tile = [6, 3]
 	$Player.position = Vector2(
 		(player_tile[0] + 1.5) * TILE_SIZE,
