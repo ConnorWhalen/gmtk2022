@@ -75,6 +75,7 @@ func _ready():
 func _process(delta):
 	if(right_roll_flag):
 		roll_progress = clamp(roll_progress + speed, 0, 1.0)
+		position += Vector2(PLAYER_WIDTH * speed,0)
 		set_progress(roll_progress)
 		set_shader(true,false,false,false)
 		if roll_progress == 1.0:
@@ -84,6 +85,7 @@ func _process(delta):
 			set_shader(false,false,false,false)
 	elif(left_roll_flag):
 		roll_progress = clamp(roll_progress + speed, 0, 1.0)
+		position += Vector2(-PLAYER_WIDTH * speed,0)
 		set_progress(roll_progress)
 		set_shader(false,true,false,false)
 		if roll_progress == 1.0:
@@ -93,6 +95,7 @@ func _process(delta):
 			set_shader(false,false,false,false)
 	elif(up_roll_flag):
 		roll_progress = clamp(roll_progress + speed, 0, 1.0)
+		position += Vector2(0,-PLAYER_HEIGHT * speed)
 		set_progress(roll_progress)
 		set_shader(false,false,true,false)
 		if roll_progress == 1.0:
@@ -102,6 +105,7 @@ func _process(delta):
 			set_shader(false,false,false,false)
 	elif(down_roll_flag):
 		roll_progress = clamp(roll_progress + speed, 0, 1.0)
+		position += Vector2(0,PLAYER_HEIGHT * speed)
 		set_progress(roll_progress)
 		set_shader(false,false,false,true)
 		if roll_progress == 1.0:
@@ -138,22 +142,18 @@ func _process(delta):
 func move(direction):
 	match direction:
 		"right":
-			position += Vector2(PLAYER_WIDTH,0)
 			if(right_roll_flag == false):
 				roll(DIR_RIGHT)
 				right_roll_flag = true
 		"left":
-			position += Vector2(-PLAYER_WIDTH,0)
 			if(left_roll_flag == false):
 				roll(DIR_LEFT)
 				left_roll_flag = true
 		"up":
-			position += Vector2(0,-PLAYER_HEIGHT)
 			if(up_roll_flag == false):
 				roll(DIR_UP)
 				up_roll_flag = true
 		"down":
-			position += Vector2(0,PLAYER_HEIGHT)
 			if(down_roll_flag == false):
 				roll(DIR_DOWN)
 				down_roll_flag = true
