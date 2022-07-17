@@ -1,6 +1,9 @@
-extends Control
+extends CanvasLayer
+
+signal exit_game
 
 var is_paused = false setget set_is_paused
+var exit = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
@@ -9,10 +12,12 @@ func _unhandled_input(event):
 func set_is_paused(value):
 	is_paused = value
 	get_tree().paused = is_paused
-	visible = is_paused
+	$PauseMenu.visible = is_paused
 
 func _on_Resume_pressed():
 	self.is_paused = false
 
 func _on_Quit_pressed():
-	get_tree().change_scene("res://scenes/Menu.tscn")
+	get_tree().paused = false
+	emit_signal("exit_game")
+#	get_tree().change_scene("res://scenes/Menu.tscn")

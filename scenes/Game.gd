@@ -1,5 +1,7 @@
 extends Node2D
 
+signal mode_menu
+signal exit_game
 
 onready var Chip = preload("res://scenes/Chip.tscn")
 onready var Special = preload("res://scenes/Special.tscn")
@@ -61,7 +63,7 @@ func _process(delta):
 
 	for special in specials:
 		if special.tile == player_tile and $Player.get_top_value() == special.value:
-			apply_special()
+			apply_special(special.position)
 			special.dead = true
 	
 	for card in cards:
@@ -72,6 +74,9 @@ func _process(delta):
 		hide_indicator()
 	else:
 		show_indicator()
+	
+	if $Dollar.visible:
+		$Dollar.position.y -= 1
 
 func _physics_process(delta):
 	for chip in chips:
@@ -142,11 +147,17 @@ func hit():
 			hit_lock = false
 
 
-func apply_special():
+func apply_special(pos):
 	health += 1
 	update_health()
 	score += SPECIAL_POINTS
 	update_score()
+	
+	$Dollar.position = pos + Vector2(32, 32)
+	$Dollar.visible = true
+	yield(get_tree().create_timer(1, false), "timeout")
+	$Dollar.visible = false
+	
 
 
 func update_health():
@@ -247,3 +258,7 @@ func hide_indicator():
 	$IndicatorE.visible = false
 	$IndicatorS.visible = false
 	$IndicatorW.visible = false
+
+
+func _on_CanvasLayer_exit_game():
+	emit_signal("mode_menu")
