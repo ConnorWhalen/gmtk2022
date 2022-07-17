@@ -27,7 +27,7 @@ var enter_debounce = true
 var save_stats
 
 func _ready():
-	save_stats = Save.pull_stats()
+	save_stats = Save.save_data
 
 	for i in range(len(upgrades)):
 		get_node(upgrades[i][0]).position = Vector2(X_POSITIONS[1], Y_POSITIONS[i])
@@ -36,14 +36,11 @@ func _ready():
 		get_node(upgrades[i][2]).rect_position = Vector2(X_POSITIONS[3], Y_POSITIONS[i]-38)
 		get_node(upgrades[i][2]).rect_size.x = 240
 
-		print("Hello")
-		print(Save.STAT_INDEX.STAT_INDEX_max)
 
-	init(0)
-	pass
+	init()
 
 
-func init(data):
+func init():
 	for i in range(Save.STAT_INDEX.STAT_INDEX_max):
 		choices.append(
 			{
@@ -110,7 +107,8 @@ func select_option(index):
 	if index < choices.size()-1:
 		try_buy(index)
 	else:
-		emit_signal("mode_menu", null)
+		emit_signal("mode_menu")
+
 
 func try_buy(index):
 	var cost = choices[index]["cost"]
@@ -125,6 +123,6 @@ func try_buy(index):
 		get_node(choices[index]["count_label"]).text = str(count)
 		$Cash.text = "$" + str(save_stats["cash"])
 		choices[index]["cost"] = BASE_COST + COST_WEIGHT*save_stats["stats"][index]["count"]
-		get_node(choices[index]["cost_label"]).text = str(choices[index]["cost"])
+		get_node(choices[index]["cost_label"]).text = "$" + str(choices[index]["cost"])
 
 		Save.push_stats()

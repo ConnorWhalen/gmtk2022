@@ -51,19 +51,20 @@ func _input(_event):
 
 
 func try_move_player(direction):
-	var next_tile = [player_tile[0], player_tile[1]]
-	match direction:
-		"right":
-			next_tile[0] += 1
-		"left":
-			next_tile[0] -= 1
-		"up":
-			next_tile[1] -= 1
-		"down":
-			next_tile[1] += 1
-	if is_tile_in_bounds(next_tile[0], next_tile[1]):
-		$Player.move(direction)
-		player_tile = next_tile
+	if not $Player.is_rolling():
+		var next_tile = [player_tile[0], player_tile[1]]
+		match direction:
+			"right":
+				next_tile[0] += 1
+			"left":
+				next_tile[0] -= 1
+			"up":
+				next_tile[1] -= 1
+			"down":
+				next_tile[1] += 1
+		if is_tile_in_bounds(next_tile[0], next_tile[1]):
+			$Player.move(direction)
+			player_tile = next_tile
 
 
 func is_tile_in_bounds(x, y):
@@ -81,12 +82,10 @@ func get_random_tile():
 
 
 func apply_special(pos):
-	print("SHOWING DOLLAR")
 	$Dollar.position = pos + Vector2(32, 32)
 	$Dollar.visible = true
 	yield(get_tree().create_timer(1, false), "timeout")
 	$Dollar.visible = false
-	print("HIDING DOLLAR")
 
 
 func show_indicator():
