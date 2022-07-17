@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CasinoRoyale.mp3-aec62172755afa94f4917ac05db0c13f.mp3str"
+
+[deps]
+
+source_file="res://assets/CasinoRoyale.mp3"
+dest_files=[ "res://.import/CasinoRoyale.mp3-aec62172755afa94f4917ac05db0c13f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

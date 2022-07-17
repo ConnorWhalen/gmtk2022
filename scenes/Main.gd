@@ -4,17 +4,21 @@ enum Mode {
 	MENU,
 	GAME,
 	UPGRADE,
-	HOWTO
+	HOWTO,
+	OPTIONS
 }
 
-signal mode_menu(data)
-signal mode_game(data)
-signal mode_upgrade(data)
+signal mode_menu
+signal mode_game
+signal mode_upgrade
+signal mode_howto
+signal mode_options
 
 onready var menu_scene = preload("res://scenes/Menu.tscn")
 onready var game_scene = preload("res://scenes/Game.tscn")
-#onready var upgrade_scene = preload("res://scenes/Upgrade.tscn")
-#onready var howto_scene = preload("res://scenes/Howto.tscn")
+onready var upgrade_scene = preload("res://scenes/Upgrade.tscn")
+onready var howto_scene = preload("res://scenes/HowTo.tscn")
+onready var options_scene = preload("res://scenes/options.tscn")
 
 var current_mode_id
 var current_mode
@@ -25,6 +29,7 @@ func _ready():
 
 
 func set_mode(mode_id):
+	print("CHANGING MODE: " + str(mode_id))
 	remove_child(current_mode)
 	current_mode_id = mode_id
 	match current_mode_id:
@@ -33,15 +38,18 @@ func set_mode(mode_id):
 		Mode.GAME:
 			current_mode = game_scene.instance()
 		Mode.UPGRADE:
-			pass # current_mode = upgrade_scene.instance()
+			current_mode = upgrade_scene.instance()
 		Mode.HOWTO:
-			pass # current_mode = howto_scene.instance()
+			current_mode = howto_scene.instance()
+		Mode.OPTIONS:
+			current_mode = options_scene.instance()
 		
 	add_child(current_mode)
 	current_mode.connect("mode_menu", self, "set_mode_menu")
 	current_mode.connect("mode_game", self, "set_mode_game")
 	current_mode.connect("mode_upgrade", self, "set_mode_upgrade")
 	current_mode.connect("mode_howto", self, "set_mode_howto")
+	current_mode.connect("mode_options", self, "set_mode_options")
 
 
 func set_mode_menu():
@@ -55,3 +63,6 @@ func set_mode_upgrade():
 
 func set_mode_howto():
 	set_mode(Mode.HOWTO)
+
+func set_mode_options():
+	set_mode(Mode.OPTIONS)

@@ -1,5 +1,7 @@
 extends Control
 
+signal mode_menu
+
 onready var Special = preload("res://scenes/Special.tscn")
 
 
@@ -112,10 +114,6 @@ func hide_indicator():
 	$IndicatorE.visible = false
 	$IndicatorS.visible = false
 	$IndicatorW.visible = false
-
-
-func _on_Back_pressed():
-	get_tree().change_scene("res://scenes/Menu.tscn")
 
 
 func _on_SpecialTimer_timeout():

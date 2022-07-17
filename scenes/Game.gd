@@ -1,5 +1,8 @@
 extends Node2D
 
+signal mode_menu
+signal mode_upgrade
+signal exit_game
 
 onready var Chip = preload("res://scenes/Chip.tscn")
 onready var Special = preload("res://scenes/Special.tscn")
@@ -33,6 +36,7 @@ var player_tile = [0, 0]
 var rng
 var health = 3
 var score = 0
+var elapsed = 0
 var hit_lock = false
 var player_dead = false
 
@@ -58,10 +62,19 @@ func _process(delta):
 	if not player_dead:
 		score += delta * SCORE_SPEED
 		update_score()
+	
+	elapsed += delta
+	var secs = int(elapsed) % 60
+	var mins = int(elapsed) / 60
+	$TimeLabel.text = str(mins) + ":"
+	if secs < 10:
+		$TimeLabel.text += "0" + str(secs)
+	else:
+		$TimeLabel.text += str(secs)
 
 	for special in specials:
 		if special.tile == player_tile and $Player.get_top_value() == special.value:
-			apply_special()
+			apply_special(special.position)
 			special.dead = true
 	
 	for card in cards:
@@ -72,6 +85,12 @@ func _process(delta):
 		hide_indicator()
 	else:
 		show_indicator()
+	
+	if $Dollar.visible:
+		$Dollar.position.y -= 1
+	if $CanvasLayer2/DeadLabel.visible:
+		if $CanvasLayer2/DeadLabel.scale.x < 4:
+			$CanvasLayer2/DeadLabel.scale += Vector2(0.01, 0.01)
 
 func _physics_process(delta):
 	for chip in chips:
@@ -127,26 +146,51 @@ func hit():
 		$Player.visible = false
 		if health == 0:
 			player_dead = true
+			$CanvasLayer2/DeadLabel.visible = true
+			yield(get_tree().create_timer(8, false), "timeout")
+			if get_tree() == null:
+				return
+			emit_signal("mode_upgrade")
 		else:
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = false
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = false
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			$Player.visible = true
 			yield(get_tree().create_timer(0.2, false), "timeout")
+			if get_tree() == null:
+				return
 			hit_lock = false
 
 
-func apply_special():
+func apply_special(pos):
 	health += 1
 	update_health()
 	score += SPECIAL_POINTS
 	update_score()
+	
+	$Dollar.position = pos + Vector2(32, 32)
+	$Dollar.visible = true
+	yield(get_tree().create_timer(1, false), "timeout")
+	if get_tree() == null:
+		return
+	$Dollar.visible = false
+	
 
 
 func update_health():
@@ -247,3 +291,7 @@ func hide_indicator():
 	$IndicatorE.visible = false
 	$IndicatorS.visible = false
 	$IndicatorW.visible = false
+
+
+func _on_CanvasLayer_exit_game():
+	emit_signal("mode_menu")
