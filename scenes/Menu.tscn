@@ -26,6 +26,9 @@ margin_right = 1636.0
 margin_bottom = 980.0
 rect_scale = Vector2( 0.48, 0.48 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Menu" type="Control" parent="."]
 anchor_left = 0.5

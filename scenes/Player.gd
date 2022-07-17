@@ -153,18 +153,23 @@ func move(direction):
 			if(right_roll_flag == false):
 				roll(DIR_RIGHT)
 				right_roll_flag = true
+				return true
 		"left":
 			if(left_roll_flag == false):
 				roll(DIR_LEFT)
 				left_roll_flag = true
+				return true
 		"up":
 			if(up_roll_flag == false):
 				roll(DIR_UP)
 				up_roll_flag = true
+				return true
 		"down":
 			if(down_roll_flag == false):
 				roll(DIR_DOWN)
 				down_roll_flag = true
+				return true
+	return false
 
 
 func get_top_value():

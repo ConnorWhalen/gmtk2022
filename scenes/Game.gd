@@ -14,17 +14,17 @@ var TILE_SIZE = 64
 var RIGHT_BOUND = SCREEN_WIDTH/TILE_SIZE - 2
 var BOTTOM_BOUND = SCREEN_HEIGHT/TILE_SIZE - 2
 
-var chip_time_min = 2
-var chip_time_max = 4
+var chip_time_min = 4
+var chip_time_max = 8
 var special_time_min = 10
 var special_time_max = 15
-var card_time_min = 8
-var card_time_max = 12
+var card_time_min = 12
+var card_time_max = 16
 
-var CHIP_RATE_MAX = 0.15
-var CHIP_INCREASE_RATE = 0.985
-var CARD_RATE_MAX = 0.05
-var CARD_INCREASE_RATE = 0.97
+var CHIP_RATE_MAX = 0.7
+var CHIP_INCREASE_RATE = 0.9997
+var CARD_RATE_MAX = 0.7
+var CARD_INCREASE_RATE = 0.9997
 
 var SCORE_SPEED = 20
 var SPECIAL_POINTS = 1000
@@ -97,6 +97,12 @@ func _process(delta):
 		if $CanvasLayer2/DeadLabel.scale.x < 4:
 			$CanvasLayer2/DeadLabel.scale += Vector2(0.01, 0.01)
 
+	chip_time_min = pow(chip_time_min+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
+	chip_time_max = pow(chip_time_max+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
+
+	card_time_min = pow(card_time_min+CARD_RATE_MAX, CARD_INCREASE_RATE) - CARD_RATE_MAX
+	card_time_max = pow(card_time_max+CARD_RATE_MAX, CARD_INCREASE_RATE) - CARD_RATE_MAX
+
 func _physics_process(delta):
 	for chip in chips:
 		var collision = chip.do_move_and_collide()
@@ -130,8 +136,8 @@ func try_move_player(direction):
 			"down":
 				next_tile[1] += 1
 		if is_tile_in_bounds(next_tile[0], next_tile[1]):
-			$Player.move(direction)
-			player_tile = next_tile
+			if $Player.move(direction):
+				player_tile = next_tile
 
 
 func cull(nodes):
@@ -186,8 +192,8 @@ func hit():
 
 
 func apply_special(pos):
-	health += 1
-	update_health()
+#	health += 1
+#	update_health()
 	score += SPECIAL_POINTS
 	update_score()
 	
@@ -249,9 +255,7 @@ func _on_ChipTimer_timeout():
 	add_child(chip)
 	chips.append(chip)
 	set_timer_wait($ChipTimer, chip_time_min, chip_time_max)
-	chip_time_min = pow(chip_time_min+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
-	chip_time_max = pow(chip_time_max+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
-#	print("CHIP TIME: " + str(chip_time_min) + " - " + str(chip_time_max))
+	print("CHIP TIME: " + str(chip_time_min) + " - " + str(chip_time_max))
 
 
 func _on_SpecialTimer_timeout():
@@ -269,9 +273,7 @@ func _on_CardTimer_timeout():
 	add_child(card)
 	cards.append(card)
 	set_timer_wait($CardTimer, card_time_min, card_time_max)
-	card_time_min = pow(card_time_min+CHIP_RATE_MAX, CARD_INCREASE_RATE) - CHIP_RATE_MAX
-	card_time_max = pow(card_time_max+CHIP_RATE_MAX, CARD_INCREASE_RATE) - CHIP_RATE_MAX
-#	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
+	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
 	
 
 func show_indicator():
