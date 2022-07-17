@@ -27,14 +27,24 @@ func _ready():
 	set_card_sprite($Container/Card2)
 	
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	$Warning.visible = false
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	$Warning.visible = true
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	$Warning.visible = false
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	$Warning.visible = true
 	yield(get_tree().create_timer(0.5, false), "timeout")
+	if get_tree() == null:
+		return
 	$Warning.visible = false
 	$Container.visible = true
 	state = CardState.SLAMMING
@@ -51,6 +61,8 @@ func _process(delta):
 				$Container/Slam.visible = true
 				state = CardState.DOWN
 				yield(get_tree().create_timer(0.5, false), "timeout")
+				if get_tree() == null:
+					return
 				$Container/Slam.visible = false
 				dead = true
 
