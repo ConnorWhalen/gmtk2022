@@ -22,3 +22,7 @@ func _on_OptionsButton_pressed():
 
 func _on_HowToButton_pressed():
 	get_tree().change_scene("res://scenes/HowTo.tscn")
+
+
+func _on_ShopButton_pressed():
+	get_tree().change_scene("res://scenes/Upgrade.tscn")
