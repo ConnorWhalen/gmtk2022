@@ -65,48 +65,40 @@ custom_constants/separation = 14
 alignment = 1
 
 [node name="Control" type="Control" parent="Menu/VBoxContainer"]
-margin_top = 86.0
+margin_top = 122.0
 margin_right = 320.0
-margin_bottom = 126.0
+margin_bottom = 162.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="StartButton" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 140.0
+margin_top = 176.0
 margin_right = 320.0
-margin_bottom = 198.0
+margin_bottom = 234.0
 custom_fonts/font = SubResource( 1 )
 text = "Start"
 
 [node name="ShopButton" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 212.0
+margin_top = 248.0
 margin_right = 320.0
-margin_bottom = 270.0
+margin_bottom = 306.0
 custom_fonts/font = SubResource( 1 )
 text = "Shop"
 
 [node name="HowToButton" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 284.0
+margin_top = 320.0
 margin_right = 320.0
-margin_bottom = 342.0
+margin_bottom = 378.0
 custom_fonts/font = SubResource( 1 )
 text = "How to Play"
 
 [node name="OptionsButton" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 356.0
+margin_top = 392.0
 margin_right = 320.0
-margin_bottom = 414.0
+margin_bottom = 450.0
 custom_fonts/font = SubResource( 1 )
 text = "Options"
-
-[node name="QuitButton" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 428.0
-margin_right = 320.0
-margin_bottom = 486.0
-custom_fonts/font = SubResource( 1 )
-text = "Quit"
 
 [connection signal="pressed" from="Menu/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HowToButton" to="." method="_on_HowToButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
