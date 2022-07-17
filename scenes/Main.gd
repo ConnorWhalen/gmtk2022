@@ -19,6 +19,8 @@ onready var game_scene = preload("res://scenes/Game.tscn")
 onready var upgrade_scene = preload("res://scenes/Upgrade.tscn")
 onready var howto_scene = preload("res://scenes/HowTo.tscn")
 onready var options_scene = preload("res://scenes/options.tscn")
+export var audio_bus_name := "Master"
+onready var _bus := AudioServer.get_bus_index(audio_bus_name)
 
 var current_mode_id
 var current_mode
@@ -26,6 +28,9 @@ var current_mode
 
 func _ready():
 	set_mode(Mode.MENU)
+	var volume = Save.save_data["volume"]
+	$AudioStreamPlayer.play()
+	AudioServer.set_bus_volume_db(_bus, linear2db(volume/100))
 
 
 func set_mode(mode_id):

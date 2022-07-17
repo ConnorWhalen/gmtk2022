@@ -14,11 +14,3 @@ func _on_SelectDice_pressed():
 func _on_Confirm_pressed():
 #	get_tree().change_scene("res://scenes/options.tscn")
 	self.dice_menu = false
-
-
-var dice_menu = false setget set_dice_menu
-
-func set_dice_menu(value):
-	dice_menu = value
-	get_tree().paused = dice_menu
-	visible = dice_menu

@@ -31,6 +31,7 @@ func pull_stats():
 		for i in range(STAT_INDEX.STAT_INDEX_max):
 			save_stats_tmp["stats"].append({"count": 0})
 		save_stats_tmp["texture_pack"] = TexturePacks.TP_INDEX.DEFAULT_TP
+		save_stats_tmp["volume"] = 100
 
 	save_file.close()
 

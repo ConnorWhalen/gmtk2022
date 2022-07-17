@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/showtime-font/Showtime-R9Ke.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/OptionsPage.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/default_die/Dice 5.png" type="Texture" id=9]
 [ext_resource path="res://assets/left.png" type="Texture" id=10]
 [ext_resource path="res://assets/right.png" type="Texture" id=11]
+[ext_resource path="res://scenes/Volume.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=2]
 size = 76
@@ -127,6 +128,9 @@ margin_left = 134.0
 margin_right = 374.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 240, 0 )
+step = 0.1
+value = 100.0
+script = ExtResource( 12 )
 
 [node name="Back" type="Button" parent="OptionsPage/VBoxContainer"]
 margin_top = 709.0
@@ -224,5 +228,6 @@ margin_bottom = 302.0
 custom_fonts/font = SubResource( 3 )
 text = "Confirm"
 
+[connection signal="value_changed" from="OptionsPage/VBoxContainer/HBoxContainer/Volume" to="OptionsPage/VBoxContainer/HBoxContainer/Volume" method="_on_Volume_value_changed"]
 [connection signal="pressed" from="OptionsPage/VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="OptionsPage/VBoxContainer2/Confirm" to="." method="_on_Confirm_pressed"]
