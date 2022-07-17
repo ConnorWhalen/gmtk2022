@@ -194,7 +194,7 @@ func set_progress(progress = 0):
 
 func roll(direction):
 	if direction == DIR_RIGHT:
-		sprite.set_texture(texture_arr[die_face.top - 1]) # Gotta shift for zero indexing
+		sprite.set_texture(texture_arr_hflip[die_face.top - 1]) # Gotta shift for zero indexing
 		sprite2.set_texture(texture_arr[die_face.right - 1]) # Gotta shift for zero indexing
 		var top = die_face.right
 		var left = die_face.top
