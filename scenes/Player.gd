@@ -44,7 +44,7 @@ onready var sprite2 = $Sprite2
 # var five_hflip =	preload("res://assets/test_die/icon_5_hflip.png")
 # var six_hflip =	fade_progress = 0	preload("res://assets/test_die/icon_6_hflip.png")
 
-onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
+var tp
 
 var texture_arr
 var texture_arr_vflip
@@ -53,6 +53,9 @@ var texture_arr_hflip
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+
+	var save_stats = Save.pull_stats()
+	tp = TexturePacks.get_texturepack(save_stats.texture_pack)
 
 	texture_arr = tp.texture_arr
 	texture_arr_vflip = tp.texture_arr_vflip
