@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/showtime-font/Showtime-R9Ke.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/right.png" type="Texture" id=2]
 [ext_resource path="res://assets/up-arrow.png" type="Texture" id=3]
 [ext_resource path="res://assets/down.png" type="Texture" id=4]
 [ext_resource path="res://scenes/HowToPage.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/board.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Indicator.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/cards.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 76
@@ -28,6 +32,9 @@ margin_top = 80.0
 margin_right = 512.0
 margin_bottom = 80.0
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Header" type="Label" parent="HowToPage"]
 anchor_left = 0.5
@@ -122,4 +129,40 @@ margin_bottom = 489.0
 custom_fonts/font = SubResource( 3 )
 text = "Back"
 
+[node name="Board" type="Sprite" parent="HowToPage"]
+position = Vector2( 0, 256 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 384, 256 )
+
+[node name="Player" parent="HowToPage" instance=ExtResource( 6 )]
+position = Vector2( -32, 224 )
+z_index = 1
+
+[node name="IndicatorN" parent="HowToPage" instance=ExtResource( 8 )]
+z_index = 1
+
+[node name="IndicatorS" parent="HowToPage" instance=ExtResource( 8 )]
+z_index = 1
+
+[node name="IndicatorE" parent="HowToPage" instance=ExtResource( 8 )]
+z_index = 1
+
+[node name="IndicatorW" parent="HowToPage" instance=ExtResource( 8 )]
+z_index = 1
+
+[node name="SpecialTimer" type="Timer" parent="HowToPage"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Dollar" type="Sprite" parent="HowToPage"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 3, 3 )
+z_index = 2
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 896, 0, 128, 128 )
+
 [connection signal="pressed" from="HowToPage/Back" to="HowToPage" method="_on_Back_pressed"]
+[connection signal="timeout" from="HowToPage/SpecialTimer" to="HowToPage" method="_on_SpecialTimer_timeout"]
