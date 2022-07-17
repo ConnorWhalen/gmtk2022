@@ -79,6 +79,16 @@ __meta__ = {
 
 [node name="IndicatorW" parent="." instance=ExtResource( 7 )]
 
+[node name="Dollar" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 3, 3 )
+z_index = 3
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 896, 0, 128, 128 )
+
 [connection signal="timeout" from="ChipTimer" to="." method="_on_ChipTimer_timeout"]
 [connection signal="timeout" from="SpecialTimer" to="." method="_on_SpecialTimer_timeout"]
+[connection signal="exit_game" from="CanvasLayer" to="." method="_on_CanvasLayer_exit_game"]
 [connection signal="timeout" from="CardTimer" to="." method="_on_CardTimer_timeout"]

@@ -12,6 +12,7 @@ size = 48
 font_data = ExtResource( 1 )
 
 [node name="Options2D" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="OptionsPage" type="Control" parent="."]
 anchor_left = 0.5
@@ -22,7 +23,9 @@ margin_left = 512.0
 margin_top = 300.0
 margin_right = 512.0
 margin_bottom = 300.0
-script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Header" type="Label" parent="OptionsPage"]
 anchor_left = 0.5
@@ -82,4 +85,4 @@ margin_bottom = 372.0
 custom_fonts/font = SubResource( 1 )
 text = "Back"
 
-[connection signal="pressed" from="OptionsPage/VBoxContainer/Back" to="OptionsPage" method="_on_Back_pressed"]
+[connection signal="pressed" from="OptionsPage/VBoxContainer/Back" to="." method="_on_Back_pressed"]
