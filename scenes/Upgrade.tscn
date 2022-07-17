@@ -137,31 +137,40 @@ margin_top = 362.0
 margin_right = 560.0
 margin_bottom = 462.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "Speed"
+text = "Health"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cash" type="RichTextLabel" parent="."]
 anchor_left = 600.0
 anchor_top = 250.0
 anchor_right = 640.0
 anchor_bottom = 290.0
-margin_left = 850.0
-margin_top = 500.0
-margin_right = 1015.0
-margin_bottom = 600.0
+margin_left = 709.0
+margin_top = 501.0
+margin_right = 1023.0
+margin_bottom = 601.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cash2" type="RichTextLabel" parent="."]
 anchor_left = 600.0
 anchor_top = 250.0
 anchor_right = 640.0
 anchor_bottom = 290.0
-margin_left = 650.0
-margin_top = 500.0
-margin_right = 850.0
-margin_bottom = 600.0
+margin_left = 509.0
+margin_top = 501.0
+margin_right = 709.0
+margin_bottom = 601.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "Funds:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="RichTextLabel" parent="."]
 anchor_left = 600.0
@@ -186,3 +195,6 @@ margin_right = 650.0
 margin_bottom = 560.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}

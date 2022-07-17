@@ -21,9 +21,9 @@ var special_time_max = 15
 var card_time_min = 8
 var card_time_max = 12
 
-var CHIP_RATE_MAX = 0.2
-var CHIP_INCREASE_RATE = 0.99
-var CARD_RATE_MAX = 0.1
+var CHIP_RATE_MAX = 0.15
+var CHIP_INCREASE_RATE = 0.985
+var CARD_RATE_MAX = 0.05
 var CARD_INCREASE_RATE = 0.97
 
 var SCORE_SPEED = 20
@@ -152,6 +152,8 @@ func hit():
 		if health == 0:
 			player_dead = true
 			$CanvasLayer2/DeadLabel.visible = true
+			Save.save_data["cash"] += int(score/100)*100
+			Save.push_stats()
 			yield(get_tree().create_timer(8, false), "timeout")
 			if get_tree() == null:
 				return
@@ -249,7 +251,7 @@ func _on_ChipTimer_timeout():
 	set_timer_wait($ChipTimer, chip_time_min, chip_time_max)
 	chip_time_min = pow(chip_time_min+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
 	chip_time_max = pow(chip_time_max+CHIP_RATE_MAX, CHIP_INCREASE_RATE) - CHIP_RATE_MAX
-	print("CHIP TIME: " + str(chip_time_min) + " - " + str(chip_time_max))
+#	print("CHIP TIME: " + str(chip_time_min) + " - " + str(chip_time_max))
 
 
 func _on_SpecialTimer_timeout():
@@ -269,7 +271,7 @@ func _on_CardTimer_timeout():
 	set_timer_wait($CardTimer, card_time_min, card_time_max)
 	card_time_min = pow(card_time_min+CHIP_RATE_MAX, CARD_INCREASE_RATE) - CHIP_RATE_MAX
 	card_time_max = pow(card_time_max+CHIP_RATE_MAX, CARD_INCREASE_RATE) - CHIP_RATE_MAX
-	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
+#	print("CARD TIME: " + str(card_time_min) + " - " + str(card_time_max))
 	
 
 func show_indicator():

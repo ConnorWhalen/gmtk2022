@@ -79,6 +79,8 @@ func _process(delta):
 		set_progress(roll_progress)
 		set_shader(true,false,false,false)
 		if roll_progress == 1.0:
+			position.x = stepify(position.x, 32)
+			position.y = stepify(position.y, 32)
 			sprite.set_texture(texture_arr[die_face.top - 1])
 			right_roll_flag = false
 			roll_progress = 0
@@ -89,6 +91,8 @@ func _process(delta):
 		set_progress(roll_progress)
 		set_shader(false,true,false,false)
 		if roll_progress == 1.0:
+			position.x = stepify(position.x, 32)
+			position.y = stepify(position.y, 32)
 			sprite2.set_texture(texture_arr[die_face.top - 1])
 			left_roll_flag = false
 			roll_progress = 0
@@ -99,6 +103,8 @@ func _process(delta):
 		set_progress(roll_progress)
 		set_shader(false,false,true,false)
 		if roll_progress == 1.0:
+			position.x = stepify(position.x, 32)
+			position.y = stepify(position.y, 32)
 			sprite2.set_texture(texture_arr[die_face.top -1])
 			up_roll_flag = false
 			roll_progress = 0
@@ -109,6 +115,8 @@ func _process(delta):
 		set_progress(roll_progress)
 		set_shader(false,false,false,true)
 		if roll_progress == 1.0:
+			position.x = stepify(position.x, 32)
+			position.y = stepify(position.y, 32)
 			sprite2.set_texture(texture_arr[die_face.top -1])
 			down_roll_flag = false
 			roll_progress = 0
