@@ -35,6 +35,7 @@ var player_tile = [0, 0]
 var rng
 var health = 3
 var score = 0
+var elapsed = 0
 var hit_lock = false
 var player_dead = false
 
@@ -60,6 +61,15 @@ func _process(delta):
 	if not player_dead:
 		score += delta * SCORE_SPEED
 		update_score()
+	
+	elapsed += delta
+	var secs = int(elapsed) % 60
+	var mins = int(elapsed) / 60
+	$TimeLabel.text = str(mins) + ":"
+	if secs < 10:
+		$TimeLabel.text += "0" + str(secs)
+	else:
+		$TimeLabel.text += str(secs)
 
 	for special in specials:
 		if special.tile == player_tile and $Player.get_top_value() == special.value:
