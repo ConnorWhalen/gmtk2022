@@ -50,11 +50,16 @@ var texture_arr
 var texture_arr_vflip
 var texture_arr_hflip
 
+var save_stats
+const SPEED_MULTIPLIER = 0.02
+var speed
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 
-	var save_stats = Save.pull_stats()
+	save_stats = Save.pull_stats()
+	speed = (save_stats["stats"][Save.STAT_INDEX.SPEED]["count"] + 1) * SPEED_MULTIPLIER
 	tp = TexturePacks.get_texturepack(save_stats.texture_pack)
 
 	texture_arr = tp.texture_arr
@@ -69,7 +74,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(right_roll_flag):
-		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
+		roll_progress = clamp(roll_progress + speed, 0, 1.0)
 		set_progress(roll_progress)
 		set_shader(true,false,false,false)
 		if roll_progress == 1.0:
@@ -78,7 +83,7 @@ func _process(delta):
 			roll_progress = 0
 			set_shader(false,false,false,false)
 	elif(left_roll_flag):
-		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
+		roll_progress = clamp(roll_progress + speed, 0, 1.0)
 		set_progress(roll_progress)
 		set_shader(false,true,false,false)
 		if roll_progress == 1.0:
@@ -87,7 +92,7 @@ func _process(delta):
 			roll_progress = 0
 			set_shader(false,false,false,false)
 	elif(up_roll_flag):
-		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
+		roll_progress = clamp(roll_progress + speed, 0, 1.0)
 		set_progress(roll_progress)
 		set_shader(false,false,true,false)
 		if roll_progress == 1.0:
@@ -96,7 +101,7 @@ func _process(delta):
 			roll_progress = 0
 			set_shader(false,false,false,false)
 	elif(down_roll_flag):
-		roll_progress = clamp(roll_progress + 0.1, 0, 1.0)
+		roll_progress = clamp(roll_progress + speed, 0, 1.0)
 		set_progress(roll_progress)
 		set_shader(false,false,false,true)
 		if roll_progress == 1.0:
