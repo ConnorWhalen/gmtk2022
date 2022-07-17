@@ -14,3 +14,6 @@ func _on_SelectDice_pressed():
 func _on_Confirm_pressed():
 #	get_tree().change_scene("res://scenes/options.tscn")
 	self.dice_menu = false
+
+func _on_ResetSave_pressed():
+	Save.reset_stats()

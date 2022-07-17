@@ -117,6 +117,22 @@ margin_bottom = 561.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 1 )
 text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResetSave" type="Button" parent="."]
+margin_left = 651.0
+margin_top = 419.0
+margin_right = 901.0
+margin_bottom = 477.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 1 )
+text = "Reset Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="value_changed" from="Volume" to="Volume" method="_on_Volume_value_changed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="ResetSave" to="." method="_on_ResetSave_pressed"]
