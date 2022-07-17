@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/showtime-font/Showtime-R9Ke.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/OptionsPage.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/colored_die/Dice 5 Blue.png" type="Texture" id=7]
 [ext_resource path="res://assets/colored_die/Dice 5 Red.png" type="Texture" id=8]
 [ext_resource path="res://assets/default_die/Dice 5.png" type="Texture" id=9]
+[ext_resource path="res://assets/left.png" type="Texture" id=10]
+[ext_resource path="res://assets/right.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=2]
 size = 76
@@ -46,9 +48,6 @@ margin_left = 512.0
 margin_top = 300.0
 margin_right = 512.0
 margin_bottom = 300.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Header" type="Label" parent="OptionsPage"]
 anchor_left = 0.5
@@ -68,30 +67,53 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -198.0
-margin_top = -166.0
-margin_right = 198.0
-margin_bottom = 166.0
+margin_left = -451.5
+margin_top = -383.5
+margin_right = 451.5
+margin_bottom = 383.5
 custom_constants/separation = 33
 alignment = 1
 
 [node name="Control" type="Control" parent="OptionsPage/VBoxContainer"]
-margin_top = 12.0
-margin_right = 396.0
-margin_bottom = 52.0
+margin_right = 1415.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 
-[node name="SelectDice" type="Button" parent="OptionsPage/VBoxContainer"]
-margin_top = 85.0
-margin_right = 396.0
-margin_bottom = 143.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsPage/VBoxContainer"]
+margin_top = 73.0
+margin_right = 1415.0
+margin_bottom = 591.0
+custom_constants/separation = 31
+
+[node name="SelectDice" type="Label" parent="OptionsPage/VBoxContainer/HBoxContainer2"]
+margin_top = 233.0
+margin_right = 210.0
+margin_bottom = 285.0
 custom_fonts/font = SubResource( 1 )
 text = "Select Dice	"
 
+[node name="Button" type="Button" parent="OptionsPage/VBoxContainer/HBoxContainer2"]
+margin_left = 241.0
+margin_right = 765.0
+margin_bottom = 518.0
+icon = ExtResource( 10 )
+
+[node name="Sprite" type="TextureRect" parent="OptionsPage/VBoxContainer/HBoxContainer2"]
+margin_left = 796.0
+margin_right = 860.0
+margin_bottom = 518.0
+texture = ExtResource( 8 )
+
+[node name="Button2" type="Button" parent="OptionsPage/VBoxContainer/HBoxContainer2"]
+margin_left = 891.0
+margin_right = 1415.0
+margin_bottom = 518.0
+icon = ExtResource( 11 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsPage/VBoxContainer"]
-margin_top = 176.0
-margin_right = 396.0
-margin_bottom = 228.0
+margin_top = 624.0
+margin_right = 1415.0
+margin_bottom = 676.0
 
 [node name="Volume2" type="Label" parent="OptionsPage/VBoxContainer/HBoxContainer"]
 margin_right = 130.0
@@ -107,9 +129,9 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 240, 0 )
 
 [node name="Back" type="Button" parent="OptionsPage/VBoxContainer"]
-margin_top = 261.0
-margin_right = 396.0
-margin_bottom = 319.0
+margin_top = 709.0
+margin_right = 1415.0
+margin_bottom = 767.0
 custom_fonts/font = SubResource( 1 )
 text = "Back"
 
@@ -202,6 +224,5 @@ margin_bottom = 302.0
 custom_fonts/font = SubResource( 3 )
 text = "Confirm"
 
-[connection signal="pressed" from="OptionsPage/VBoxContainer/SelectDice" to="." method="_on_SelectDice_pressed"]
 [connection signal="pressed" from="OptionsPage/VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="OptionsPage/VBoxContainer2/Confirm" to="." method="_on_Confirm_pressed"]

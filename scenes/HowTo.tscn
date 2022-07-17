@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/showtime-font/Showtime-R9Ke.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/right.png" type="Texture" id=2]
@@ -9,11 +9,8 @@
 [ext_resource path="res://assets/board.png" type="Texture" id=7]
 [ext_resource path="res://scenes/Indicator.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/cards.png" type="Texture" id=9]
-
-[ext_resource path="res://assets/casino-floor-copy.webp" type="Texture" id=11]
-
 [ext_resource path="res://scenes/HowTo.gd" type="Script" id=10]
-
+[ext_resource path="res://assets/casino-floor-copy.webp" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 76

@@ -102,9 +102,8 @@ margin_bottom = 486.0
 custom_fonts/font = SubResource( 1 )
 text = "Quit"
 
-
 [connection signal="pressed" from="Menu/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HowToButton" to="." method="_on_HowToButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
