@@ -68,7 +68,7 @@ func _process(delta):
 		if card.is_down() and card.tile == player_tile:
 			hit()
 
-	if $Player.is_rolling():
+	if $Player.is_rolling() or player_dead:
 		hide_indicator()
 	else:
 		show_indicator()
@@ -94,19 +94,20 @@ func _input(_event):
 
 
 func try_move_player(direction):
-	var next_tile = [player_tile[0], player_tile[1]]
-	match direction:
-		"right":
-			next_tile[0] += 1
-		"left":
-			next_tile[0] -= 1
-		"up":
-			next_tile[1] -= 1
-		"down":
-			next_tile[1] += 1
-	if is_tile_in_bounds(next_tile[0], next_tile[1]):
-		$Player.move(direction)
-		player_tile = next_tile
+	if not $Player.is_rolling():
+		var next_tile = [player_tile[0], player_tile[1]]
+		match direction:
+			"right":
+				next_tile[0] += 1
+			"left":
+				next_tile[0] -= 1
+			"up":
+				next_tile[1] -= 1
+			"down":
+				next_tile[1] += 1
+		if is_tile_in_bounds(next_tile[0], next_tile[1]):
+			$Player.move(direction)
+			player_tile = next_tile
 
 
 func cull(nodes):

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var tp = TexturePacks.get_texturepack(TexturePacks.TP_INDEX.DEFAULT_TP)
+var tp
 
 var SCREEN_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 var SCREEN_WIDTH = ProjectSettings.get_setting("display/window/size/width")
@@ -16,6 +16,8 @@ func _ready():
 	rng.randomize()
 	value = (rng.randi() % 6) + 1
 	
+	var save_stats = Save.pull_stats()
+	tp = TexturePacks.get_texturepack(save_stats.texture_pack)
 	var texture_arr = tp.texture_arr
 	$Sprite.set_texture(texture_arr[value-1])
 	
